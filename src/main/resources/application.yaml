@@ -1,0 +1,33 @@
+server:
+  port: ${PORT:8081}
+
+spring:
+  application:
+    name: inventory-service
+
+  # Disable local docker-compose auto-start since we use Neon PostgreSQL
+  docker:
+    compose:
+      enabled: false
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://ep-crimson-boat-a57jr97s-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require}
+    username: ${DB_USERNAME:neondb_owner}
+    password: ${DB_PASSWORD:npg_3BmOpdlt9CTI}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+# SpringDoc OpenAPI / Swagger UI configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
